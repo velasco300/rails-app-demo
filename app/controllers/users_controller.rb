@@ -40,6 +40,12 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def search
+  end
+
+  def modify_password
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

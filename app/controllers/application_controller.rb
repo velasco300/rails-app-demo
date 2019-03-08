@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
 
   rescue_from Exception do |e|
     puts "rescue_from------#{Rails.env}------#{e.class}------#{e.code}------#{e.msg}"
+    puts e.backtrace
     render json: {success: false, code: e.code, msg: e.msg}
   end
 
