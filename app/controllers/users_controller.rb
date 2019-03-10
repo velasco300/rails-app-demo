@@ -5,9 +5,8 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-    e = AppException.new('测试测试')
-    raise e
-    render json: @users
+    puts params
+    success_msg @users
   end
 
   # GET /users/1

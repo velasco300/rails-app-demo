@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  get 'sessions/login', to: 'sessions#login'
+  get 'sessions/index', to: 'sessions#index'
   resources :microposts
-  get 'sessions/index'
   resources :permissions
   resources :roles
   resources :users do
