@@ -5,32 +5,35 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
-    puts params
     success_msg @users
   end
 
   # GET /users/1
   def show
-    render json: @user
+    success_msg @user
   end
 
   # POST /users
   def create
-    @user = User.new(user_params)
-
+    @user = User.new(user_name: params[:user_name],
+                         nick_name: params[:nick_name],
+                         password: params[:password])
     if @user.save
-      render json: @user, status: :created, location: @user
+      success_msg @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      err_msg @user.errors.messages
     end
   end
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: @user
+    p = {user_name: params[:user_name],
+         nick_name: params[:nick_name]
+        }.compact
+    if @user.update(p)
+      success_msg @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      err_msg @user.errors.messages
     end
   end
 
@@ -46,13 +49,8 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.require(:user).permit(:user_name, :password_digest)
-    end
 end
