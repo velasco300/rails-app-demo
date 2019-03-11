@@ -1,5 +1,8 @@
+# coding: utf-8
 class User < ApplicationRecord
   has_secure_password
+  validates :user_name, presence: { message: "用户名不能为空" }, uniqueness: { message: "用户名已经存在" }
+
   has_many :user_role_rsps
   has_many :roles, through: :user_role_rsps
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
