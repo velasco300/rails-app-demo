@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
 
   protected
   def success_msg(code = '0x001', msg = '成功', data)
-    render json: {success: true, code: code, msg: msg, data: data}
+    render json: {success: true, code: code, msg: msg, new_token: params[:new_token], data: data}
   end
 
   def err_msg(code = nil, msg)
