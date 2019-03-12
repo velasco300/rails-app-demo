@@ -1,6 +1,7 @@
 # coding: utf-8
 class ApplicationController < ActionController::API
   before_action :app_session_auth
+  skip_before_action :app_session_auth, only: [:render_not_found]
 
   rescue_from Exception do |e|
     puts "------rescue_from------#{Rails.env}------#{e.class}------#{e.message}------"
@@ -10,6 +11,10 @@ class ApplicationController < ActionController::API
       puts e.backtrace
       render json: {success: false, code: '0x004', msg: '系统错误,请联系管理员!!!'}
     end
+  end
+
+  def render_not_found
+    raise Exception
   end
 
   protected

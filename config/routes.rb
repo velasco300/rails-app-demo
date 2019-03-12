@@ -13,4 +13,5 @@ Rails.application.routes.draw do
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  match '*path' => proc { |env| ApplicationController.action(:render_not_found).call(env) }, via: :all
 end
