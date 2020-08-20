@@ -2,6 +2,7 @@
 class User < ApplicationRecord
   has_secure_password
   validates :user_name, presence: { message: "用户名不能为空" }, uniqueness: { message: "用户名已经存在" }
+  validates :password, presence: {message: '密码不能为空'}, length: { minimum: 6, message: '密码不能少于6位' }
 
   has_many :user_role_rsps
   has_many :roles, through: :user_role_rsps

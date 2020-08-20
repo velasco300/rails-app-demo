@@ -46,6 +46,9 @@ class UsersController < ApplicationController
   end
 
   def modify_password
+    if @user.authenticate('123456')
+      @user.update({password: 'bbbbbb'})
+    end
   end
 
   private
