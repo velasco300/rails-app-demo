@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :roles
   resources :users do
     member do
-      put 'modify_password'
+      put 'pmodify', to: 'users#modify_password'
     end
     collection do
       get 'search'
